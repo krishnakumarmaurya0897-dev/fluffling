@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fluffling — Cake Gel for Home Bakers</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FDF6EE;
+    --warm-white: #FFFCF8;
+    --blush: #F7E0D6;
+    --rose: #E8A898;
+    --deep-rose: #C47060;
+    --caramel: #D4956A;
+    --butter: #F5DFA0;
+    --sage: #B5C9A8;
+    --dark: #3D2B1F;
+    --mid: #7A5C4E;
+    --light-text: #A88070;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(253,246,238,0.92);
+    backdrop-filter: blur(12px);
+    padding: 1rem 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid rgba(212,149,106,0.15);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--deep-rose);
+    text-decoration: none;
+  }
+  .nav-logo span { font-style: italic; color: var(--caramel); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--mid);
+    font-size: 0.9rem;
+    font-weight: 400;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--deep-rose); }
+  .nav-cta {
+    background: var(--deep-rose);
+    color: white !important;
+    padding: 0.5rem 1.25rem;
+    border-radius: 50px;
+    font-weight: 500 !important;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--caramel) !important; color: white !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 7rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.45;
+    pointer-events: none;
+  }
+  .blob1 { width: 500px; height: 500px; background: var(--blush); top: -100px; right: -100px; }
+  .blob2 { width: 300px; height: 300px; background: var(--butter); bottom: 50px; left: -80px; }
+  .blob3 { width: 200px; height: 200px; background: var(--sage); top: 200px; left: 40%; }
+
+  .hero-inner {
+    max-width: 1100px; margin: 0 auto; width: 100%;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+    position: relative; z-index: 1;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    background: var(--butter);
+    color: #8B6914;
+    font-size: 0.78rem; font-weight: 500;
+    padding: 0.35rem 1rem;
+    border-radius: 50px;
+    margin-bottom: 1.25rem;
+    border: 1px solid rgba(139,105,20,0.2);
+  }
+  .hero-badge::before { content: '✦'; font-size: 0.65rem; }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 5vw, 3.8rem);
+    line-height: 1.15;
+    color: var(--dark);
+    margin-bottom: 1.25rem;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--deep-rose);
+    display: block;
+  }
+  .hero p {
+    font-size: 1.05rem;
+    color: var(--mid);
+    line-height: 1.75;
+    margin-bottom: 2rem;
+    font-weight: 300;
+    max-width: 440px;
+  }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--deep-rose);
+    color: white;
+    padding: 0.85rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.25s;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+  }
+  .btn-primary:hover { background: var(--caramel); transform: translateY(-2px); }
+  .btn-secondary {
+    background: transparent;
+    color: var(--mid);
+    padding: 0.85rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    border: 1.5px solid var(--rose);
+    transition: all 0.25s;
+  }
+  .btn-secondary:hover { background: var(--blush); color: var(--dark); }
+
+  .hero-visual {
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-cake-card {
+    background: var(--warm-white);
+    border-radius: 32px;
+    padding: 2.5rem;
+    border: 1px solid rgba(212,149,106,0.2);
+    text-align: center;
+    position: relative;
+    width: 100%;
+    max-width: 360px;
+    box-shadow: 0 20px 60px rgba(196,112,96,0.12);
+  }
+  .cake-emoji { font-size: 5rem; display: block; margin-bottom: 1rem; animation: float 3s ease-in-out infinite; }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+  .hero-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--dark);
+    margin-bottom: 0.5rem;
+  }
+  .hero-card-sub { font-size: 0.88rem; color: var(--light-text); font-weight: 300; }
+  .floating-tag {
+    position: absolute;
+    background: white;
+    border: 1px solid rgba(212,149,106,0.25);
+    border-radius: 12px;
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+    color: var(--mid);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+    white-space: nowrap;
+  }
+  .tag1 { top: -15px; left: -30px; animation: float 3.5s ease-in-out infinite; }
+  .tag2 { bottom: 20px; right: -30px; animation: float 2.8s ease-in-out infinite 0.5s; }
+  .tag1 span, .tag2 span { font-weight: 500; color: var(--deep-rose); }
+
+  /* TRUST BAR */
+  .trust-bar {
+    background: var(--warm-white);
+    border-top: 1px solid rgba(212,149,106,0.15);
+    border-bottom: 1px solid rgba(212,149,106,0.15);
+    padding: 1.25rem 2rem;
+    display: flex; align-items: center; justify-content: center;
+    gap: 3rem; flex-wrap: wrap;
+  }
+  .trust-item {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.85rem; color: var(--mid); font-weight: 400;
+  }
+  .trust-item strong { color: var(--dark); font-weight: 500; }
+  .trust-icon { font-size: 1.1rem; }
+
+  /* SECTION BASE */
+  section { padding: 5rem 2rem; }
+  .section-inner { max-width: 1100px; margin: 0 auto; width: 100%; }
+  .section-label {
+    font-size: 0.78rem; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--caramel);
+    margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    line-height: 1.2;
+    color: var(--dark);
+    margin-bottom: 1rem;
+  }
+  .section-subtitle {
+    font-size: 1rem; color: var(--mid); font-weight: 300;
+    line-height: 1.7; max-width: 520px;
+  }
+
+  /* HOW IT WORKS */
+  .how-section { background: var(--warm-white); }
+  .steps-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem; margin-top: 3rem;
+  }
+  .step-card {
+    background: var(--cream);
+    border-radius: 24px;
+    padding: 2rem 1.75rem;
+    border: 1px solid rgba(212,149,106,0.12);
+    position: relative;
+    transition: transform 0.25s;
+  }
+  .step-card:hover { transform: translateY(-4px); }
+  .step-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem; font-weight: 600;
+    color: rgba(212,149,106,0.25);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+  .step-emoji { font-size: 1.8rem; display: block; margin-bottom: 0.75rem; }
+  .step-card h3 { font-size: 1rem; font-weight: 500; color: var(--dark); margin-bottom: 0.5rem; }
+  .step-card p { font-size: 0.88rem; color: var(--mid); line-height: 1.65; font-weight: 300; }
+
+  /* PRODUCTS */
+  .products-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem; margin-top: 3rem;
+  }
+  .product-card {
+    background: var(--warm-white);
+    border-radius: 28px;
+    overflow: hidden;
+    border: 1.5px solid rgba(212,149,106,0.18);
+    transition: all 0.3s;
+    position: relative;
+  }
+  .product-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(196,112,96,0.15); }
+  .product-card.featured { border-color: var(--rose); }
+  .product-badge {
+    position: absolute; top: 1rem; right: 1rem;
+    background: var(--deep-rose); color: white;
+    font-size: 0.72rem; font-weight: 500;
+    padding: 0.3rem 0.8rem; border-radius: 50px;
+  }
+  .product-img-area {
+    background: var(--blush);
+    padding: 2.5rem;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 4rem;
+  }
+  .product-info { padding: 1.75rem; }
+  .product-tag {
+    font-size: 0.75rem; font-weight: 500; color: var(--caramel);
+    text-transform: uppercase; letter-spacing: 0.08em;
+    margin-bottom: 0.5rem;
+  }
+  .product-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; color: var(--dark);
+    margin-bottom: 0.5rem;
+  }
+  .product-info p { font-size: 0.88rem; color: var(--mid); line-height: 1.6; font-weight: 300; margin-bottom: 1.25rem; }
+  .product-price {
+    display: flex; align-items: baseline; gap: 0.5rem;
+    margin-bottom: 1.25rem;
+  }
+  .price-main { font-size: 1.8rem; font-weight: 600; color: var(--dark); font-family: 'Playfair Display', serif; }
+  .price-sub { font-size: 0.82rem; color: var(--light-text); }
+  .product-perks { list-style: none; margin-bottom: 1.5rem; }
+  .product-perks li {
+    font-size: 0.85rem; color: var(--mid); padding: 0.3rem 0;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .product-perks li::before { content: '✓'; color: var(--sage); font-weight: 600; }
+  .btn-order {
+    width: 100%;
+    background: var(--deep-rose);
+    color: white;
+    border: none; cursor: pointer;
+    padding: 0.9rem;
+    border-radius: 50px;
+    font-size: 0.95rem; font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.25s;
+    text-decoration: none;
+    display: block; text-align: center;
+  }
+  .btn-order:hover { background: var(--caramel); transform: translateY(-1px); }
+
+  /* WHY */
+  .why-section { background: var(--cream); }
+  .why-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; align-items: center; margin-top: 3rem;
+  }
+  .why-visual {
+    background: var(--blush);
+    border-radius: 32px;
+    padding: 3rem;
+    text-align: center;
+  }
+  .compare-row {
+    display: flex; align-items: center; gap: 1rem;
+    background: white; border-radius: 16px;
+    padding: 1rem 1.25rem; margin-bottom: 1rem;
+    border: 1px solid rgba(212,149,106,0.15);
+  }
+  .compare-icon { font-size: 1.5rem; }
+  .compare-label { flex: 1; text-align: left; }
+  .compare-label strong { display: block; font-size: 0.9rem; font-weight: 500; color: var(--dark); }
+  .compare-label span { font-size: 0.8rem; color: var(--mid); }
+  .compare-status { font-size: 1.2rem; }
+  .why-points { list-style: none; }
+  .why-point {
+    display: flex; gap: 1rem; align-items: flex-start;
+    margin-bottom: 1.75rem;
+  }
+  .why-dot {
+    width: 40px; height: 40px; min-width: 40px;
+    background: var(--blush);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+  }
+  .why-point h4 { font-size: 0.95rem; font-weight: 500; color: var(--dark); margin-bottom: 0.25rem; }
+  .why-point p { font-size: 0.85rem; color: var(--mid); line-height: 1.6; font-weight: 300; }
+
+  /* TESTIMONIALS */
+  .testimonials-section { background: var(--warm-white); }
+  .testi-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem; margin-top: 3rem;
+  }
+  .testi-card {
+    background: var(--cream);
+    border-radius: 24px; padding: 1.75rem;
+    border: 1px solid rgba(212,149,106,0.12);
+  }
+  .testi-stars { color: var(--caramel); font-size: 0.85rem; margin-bottom: 1rem; letter-spacing: 2px; }
+  .testi-text {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 0.98rem; color: var(--dark);
+    line-height: 1.7; margin-bottom: 1.25rem;
+  }
+  .testi-author { display: flex; align-items: center; gap: 0.75rem; }
+  .testi-avatar {
+    width: 36px; height: 36px;
+    background: var(--blush);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem; font-weight: 500; color: var(--deep-rose);
+  }
+  .testi-name { font-size: 0.85rem; font-weight: 500; color: var(--dark); }
+  .testi-loc { font-size: 0.78rem; color: var(--light-text); }
+
+  /* CTA */
+  .cta-section {
+    background: var(--deep-rose);
+    text-align: center; padding: 5rem 2rem;
+  }
+  .cta-section .section-label { color: rgba(255,255,255,0.7); }
+  .cta-section .section-title { color: white; }
+  .cta-section .section-subtitle { color: rgba(255,255,255,0.8); margin: 0 auto 2.5rem; }
+  .cta-wa-btn {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    background: white; color: var(--deep-rose);
+    padding: 1rem 2.5rem; border-radius: 50px;
+    text-decoration: none; font-weight: 500; font-size: 1.05rem;
+    transition: all 0.25s;
+    border: 2px solid white;
+  }
+  .cta-wa-btn:hover { background: transparent; color: white; }
+  .wa-icon {
+    width: 24px; height: 24px;
+    background: #25D366; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem; color: white;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark);
+    color: rgba(255,255,255,0.6);
+    padding: 3rem 2rem 2rem;
+    text-align: center;
+  }
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.75rem; color: white;
+    margin-bottom: 0.5rem; display: block;
+  }
+  .footer-logo em { font-style: italic; color: var(--rose); }
+  footer p { font-size: 0.85rem; margin-bottom: 1.5rem; }
+  .footer-links { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
+  .footer-links a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--rose); }
+  .footer-bottom { font-size: 0.78rem; color: rgba(255,255,255,0.25); border-top: 1px solid rgba(255,255,255,0.08); padding-top: 1.5rem; }
+
+  /* ANIMATIONS */
+  .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 1rem; }
+    .nav-links { display: none; }
+    .hero-inner { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
+    .hero p { margin: 0 auto 2rem; }
+    .hero-btns { justify-content: center; }
+    .hero-visual { order: -1; }
+    .tag1, .tag2 { display: none; }
+    .why-grid { grid-template-columns: 1fr; }
+    .trust-bar { gap: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Fluff<span>ling</span></a>
+  <ul class="nav-links">
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#why">Why Fluffling</a></li>
+    <li><a href="#order" class="nav-cta">Order Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-blob blob1"></div>
+  <div class="hero-bg-blob blob2"></div>
+  <div class="hero-bg-blob blob3"></div>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge">Made for Home Bakers in India</div>
+      <h1>Your secret to <em>perfectly fluffy</em> cakes, every time.</h1>
+      <p>Fluffling Cake Gel is a professional-grade baking emulsifier — the same ingredient used by top bakeries, now in small sachets made for home bakers like you.</p>
+      <div class="hero-btns">
+        <a href="#order" class="btn-primary">Order on WhatsApp →</a>
+        <a href="#how" class="btn-secondary">See how it works</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-cake-card">
+        <div class="floating-tag tag1">🧁 <span>No more flat cakes</span></div>
+        <span class="cake-emoji">🎂</span>
+        <div class="hero-card-title">The Perfect Sponge</div>
+        <div class="hero-card-sub">Tall · Soft · Consistent · Bakery-quality</div>
+        <div class="floating-tag tag2">✨ <span>Just 1 tsp per cake</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item"><span class="trust-icon">🏠</span> <strong>Made for home bakers</strong></div>
+  <div class="trust-item"><span class="trust-icon">📦</span> <strong>Small, ready-to-use sachets</strong></div>
+  <div class="trust-item"><span class="trust-icon">📍</span> <strong>Ships from Vapi, Gujarat</strong></div>
+  <div class="trust-item"><span class="trust-icon">💬</span> <strong>WhatsApp support available</strong></div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how">
+  <div class="section-inner">
+    <div class="fade-up">
+      <div class="section-label">Simple as 1-2-3</div>
+      <h2 class="section-title">No complicated steps.<br>Just better cakes.</h2>
+      <p class="section-subtitle">Fluffling cake gel works with your existing recipe. Add it once and see the difference immediately.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card fade-up">
+        <div class="step-num">01</div>
+        <span class="step-emoji">🥣</span>
+        <h3>Add to your batter</h3>
+        <p>Just 1–2 teaspoons of Fluffling Cake Gel per cup of flour. Add it straight into your batter — no extra prep needed.</p>
+      </div>
+      <div class="step-card fade-up">
+        <div class="step-num">02</div>
+        <span class="step-emoji">🔄</span>
+        <h3>Mix everything together</h3>
+        <p>Use the all-in-one method — add all ingredients to one bowl and mix. The gel does the stabilising work for you.</p>
+      </div>
+      <div class="step-card fade-up">
+        <div class="step-num">03</div>
+        <span class="step-emoji">🎂</span>
+        <h3>Bake as usual</h3>
+        <p>Bake at your normal temperature and time. Open the oven to a taller, fluffier, perfectly risen sponge every time.</p>
+      </div>
+      <div class="step-card fade-up">
+        <div class="step-num">04</div>
+        <span class="step-emoji">🤩</span>
+        <h3>Show it off</h3>
+        <p>Your cakes will look and taste bakery-quality. Perfect for gifting, selling, or just impressing your family.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="section-inner">
+    <div class="fade-up">
+      <div class="section-label">Choose your size</div>
+      <h2 class="section-title">Simple, honest pricing.</h2>
+      <p class="section-subtitle">No subscriptions. No complicated tiers. Just pick the size that suits how much you bake.</p>
+    </div>
+    <div class="products-grid">
+      <div class="product-card fade-up">
+        <div class="product-img-area">🧁</div>
+        <div class="product-info">
+          <div class="product-tag">Starter Pack</div>
+          <h3>Fluffling 100g</h3>
+          <p>Perfect for home bakers who bake 1–2 cakes a week. Enough for approximately 8–10 full cakes.</p>
+          <div class="product-price">
+            <span class="price-main">₹99</span>
+            <span class="price-sub">per sachet</span>
+          </div>
+          <ul class="product-perks">
+            <li>8–10 cakes per sachet</li>
+            <li>Food-grade certified</li>
+            <li>Resealable ziplock pouch</li>
+            <li>Usage guide included</li>
+          </ul>
+          <a href="https://wa.me/91XXXXXXXXXX?text=Hi!%20I%20want%20to%20order%20Fluffling%20100g%20Cake%20Gel%20%F0%9F%8E%82" class="btn-order" target="_blank">Order on WhatsApp</a>
+        </div>
+      </div>
+      <div class="product-card featured fade-up">
+        <div class="product-badge">Best Value</div>
+        <div class="product-img-area" style="background: #F0D4CC;">🎂</div>
+        <div class="product-info">
+          <div class="product-tag">Family Pack</div>
+          <h3>Fluffling 250g</h3>
+          <p>For passionate bakers and small home businesses. More bakes, better savings, same perfect results.</p>
+          <div class="product-price">
+            <span class="price-main">₹199</span>
+            <span class="price-sub">per sachet</span>
+          </div>
+          <ul class="product-perks">
+            <li>20–25 cakes per sachet</li>
+            <li>Food-grade certified</li>
+            <li>Resealable ziplock pouch</li>
+            <li>Usage guide + recipe tips</li>
+          </ul>
+          <a href="https://wa.me/91XXXXXXXXXX?text=Hi!%20I%20want%20to%20order%20Fluffling%20250g%20Cake%20Gel%20%F0%9F%8E%82" class="btn-order" target="_blank">Order on WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY FLUFFLING -->
+<section class="why-section" id="why">
+  <div class="section-inner">
+    <div class="fade-up">
+      <div class="section-label">Why choose Fluffling</div>
+      <h2 class="section-title">Built for bakers<br>who bake at home.</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-visual fade-up">
+        <div style="font-size:0.85rem;font-weight:500;color:var(--mid);margin-bottom:1.25rem;">Without Fluffling vs With Fluffling</div>
+        <div class="compare-row">
+          <span class="compare-icon">😞</span>
+          <div class="compare-label"><strong>Flat, dense sponge</strong><span>Hours of effort, disappointing result</span></div>
+          <span class="compare-status">❌</span>
+        </div>
+        <div class="compare-row">
+          <span class="compare-icon">😤</span>
+          <div class="compare-label"><strong>Collapsing after baking</strong><span>Eggs not beaten enough — again</span></div>
+          <span class="compare-status">❌</span>
+        </div>
+        <div class="compare-row" style="background:var(--blush);">
+          <span class="compare-icon">🎂</span>
+          <div class="compare-label"><strong>Tall, fluffy, even rise</strong><span>Every single time with Fluffling</span></div>
+          <span class="compare-status">✅</span>
+        </div>
+        <div class="compare-row" style="background:var(--blush);">
+          <span class="compare-icon">😍</span>
+          <div class="compare-label"><strong>Soft crumb, stays fresh</strong><span>Shelf life improved naturally</span></div>
+          <span class="compare-status">✅</span>
+        </div>
+      </div>
+      <ul class="why-points fade-up">
+        <li class="why-point">
+          <div class="why-dot">📦</div>
+          <div>
+            <h4>Small sachets, made for you</h4>
+            <p>Unlike 800g–1kg bulk packs online, Fluffling comes in 100g and 250g sachets — the right amount for a home baker, no waste, no bulk.</p>
+          </div>
+        </li>
+        <li class="why-point">
+          <div class="why-dot">📖</div>
+          <div>
+            <h4>Instructions included, every time</h4>
+            <p>Every pack comes with a simple how-to guide in Hindi and English. No guessing. No YouTube searches. Just bake.</p>
+          </div>
+        </li>
+        <li class="why-point">
+          <div class="why-dot">💬</div>
+          <div>
+            <h4>WhatsApp support, always</h4>
+            <p>Got a question while baking at 10pm? Message us on WhatsApp. We're home bakers too — we understand the panic.</p>
+          </div>
+        </li>
+        <li class="why-point">
+          <div class="why-dot">🇮🇳</div>
+          <div>
+            <h4>Local brand, quick delivery</h4>
+            <p>We're based in Vapi, Gujarat. Orders reach most of India in 3–5 days. No waiting weeks for a product you need now.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section">
+  <div class="section-inner">
+    <div class="fade-up">
+      <div class="section-label">Happy Bakers</div>
+      <h2 class="section-title">They tried it.<br>They won't bake without it.</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card fade-up">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-text">"My sponge used to collapse every single time. One sachet of Fluffling and my first attempt was perfect. I couldn't believe it!"</div>
+        <div class="testi-author">
+          <div class="testi-avatar">PR</div>
+          <div><div class="testi-name">Priya R.</div><div class="testi-loc">Home baker · Surat</div></div>
+        </div>
+      </div>
+      <div class="testi-card fade-up">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-text">"I sell cakes from home and this has completely changed my product quality. My customers keep asking what I changed. Fluffling is my secret now 😄"</div>
+        <div class="testi-author">
+          <div class="testi-avatar">SM</div>
+          <div><div class="testi-name">Sheetal M.</div><div class="testi-loc">Home bakery · Vadodara</div></div>
+        </div>
+      </div>
+      <div class="testi-card fade-up">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-text">"The sachet size is perfect — I don't have to worry about buying a huge jar and it going bad. And the WhatsApp support is so helpful!"</div>
+        <div class="testi-author">
+          <div class="testi-avatar">AN</div>
+          <div><div class="testi-name">Ananya N.</div><div class="testi-loc">Home baker · Ahmedabad</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA / ORDER -->
+<section class="cta-section" id="order">
+  <div class="section-inner">
+    <div class="section-label">Ready to bake better?</div>
+    <h2 class="section-title" style="max-width:560px;margin:0 auto 1rem;">Order your first Fluffling sachet today.</h2>
+    <p class="section-subtitle">Just message us on WhatsApp — tell us which size you want and your address, and we'll take care of the rest.</p>
+    <a href="https://wa.me/91XXXXXXXXXX?text=Hi!%20I'd%20like%20to%20order%20Fluffling%20Cake%20Gel%20%F0%9F%8E%82" class="cta-wa-btn" target="_blank">
+      <div class="wa-icon">W</div>
+      Order on WhatsApp
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">Fluff<em>ling</em></span>
+  <p>Helping home bakers bake better, one sponge at a time. 🎂</p>
+  <div class="footer-links">
+    <a href="#how">How it works</a>
+    <a href="#products">Products</a>
+    <a href="#why">Why Fluffling</a>
+    <a href="https://wa.me/91XXXXXXXXXX" target="_blank">WhatsApp Us</a>
+    <a href="https://instagram.com/fluffling.in" target="_blank">Instagram</a>
+  </div>
+  <div class="footer-bottom">© 2025 Fluffling · Vapi, Gujarat, India · @fluffling.in</div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
